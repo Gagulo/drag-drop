@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <style>
+            .container {
+                width: 500px;
+                height: 250px;
+                border: 2px solid black;
+            }
+            .colorTextContainer{
+                border: 1px solid black;
+                height: 30px;
+                margin: 2px;
+            }
+            .colorContainer{
+                height:30px;
+                margin: 2px;
+            }
+            .red{
+                background-color: red;
+            }
+            .green{
+                background-color: green;
+            }
+            .blue{
+                background-color: blue;
+            }
+        </style>
+        <script>
+            $(document).ready(function(){
+                
+                $(".colorContainer").draggable({
+                    containment: '.container',
+                    revert: true,
+                    snap: '.colorTextContainer',
+                    snapTolerance: 50,
+                    snapMode: 'inner'
+                    });
+                
+                $("div[color-name=red]").droppable ({
+                    accept: ".red",
+                    drop: function(event, ui) {
+                        if(isDropOK() == true) {
+                            $(".ui-draggable-dragging").hide();
+                        }
+                    }
+                });
+                $("div[color-name=green]").droppable ({
+                    accept: ".green",
+                    drop: function(event, ui) {
+                        if(isDropOK() == true) {
+                            $(".ui-draggable-dragging").hide();
+                        }
+                    }
+                });
+                $("div[color-name=blue]").droppable ({
+                    accept: ".blue",
+                    drop: function(event, ui) {
+                        if(isDropOK() == true) {
+                            $(".ui-draggable-dragging").hide();
+                        }
+                    }
+                });
+            })
+           
+            
+        </script>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='col-xs-6'>
+                <div class="colorTextContainer col-xs-6" color-name="red">red</div>
+                <div class="colorTextContainer col-xs-6" color-name="green">green</div>
+                <div class="colorTextContainer col-xs-6" color-name="blue">blue</div>
+            </div>
+            <div class='col-xs-6'>
+                <div class="colorContainer col-xs-6 red"></div>
+                <div class="colorContainer col-xs-6 green"></div>
+                <div class="colorContainer col-xs-6 blue"></div>
+            </div>
+        </div>
+    </body>
+</html>
