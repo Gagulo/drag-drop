@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            .animationContainer{
+                border:1px solid black;
+                height:600px;
+                width:80%;
+                margin:5px;
+                position:relative;
+            }
+
+            #animatedSquare{
+                background-color:orangered;
+                width:50px;
+                height:50px;
+                position:absolute;
+            }
+        </style>
+        <script>
+        $(function(){   
+            $("#startStopButton").click(function(){
+                var isAnimationOngoing = $("#animatedSquare").is(':animated');
+
+                if(isAnimationOngoing){
+                    $("#animatedSquare").stop(true);
+                    $(this).text("Restart");
+                }else{
+                    restartAnimation();
+                    $(this).text("Stop");
+                }
+            });
+        }); 
+
+        function restartAnimation(){
+            var animationContainer = $(".animationContainer");
+            var animatedSquare = $("#animatedSquare");
+            
+            var horizontalDistance = animationContainer.width() - animatedSquare.width();
+            var verticalDistance = animationContainer.height() - animatedSquare.height();
+
+            animatedSquare
+            .animate({
+                left:"0px",
+                top:"0px"
+            },500)
+            .animate({
+                left: horizontalDistance + "px",
+                top: verticalDistance + "px"
+            }, 2000)
+            .animate({
+                left: "0px"
+            }, 2000)
+            .animate({
+                left: horizontalDistance + "px",
+                top: "0px"
+            }, 2000)
+            .animate({
+                left:"0px"
+            }, 2000, restartAnimation);
+        }   
+        </script>
+    </head>
+    <body>
+        <div class="animationContainer">
+            <div id="animatedSquare"></div>
+        </div>
+        <button id="startStopButton" class="btn btn-primary">Start animation</button>
+        
+    </body>
+</html>
